@@ -1,0 +1,12 @@
+[package]
+name = "guessing_game"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+rand = "0.8.5"
+
+# rand is a 'crate library' that will be use to generate a random number.
+# A section doesn't end until a section header is placed, and then a new section is created.
+# Rust creates a cargo.lock file that to make sure when a new version is released, the code doesn't break.
+# The cargo.lock file will store the version that is hard coded into it.
