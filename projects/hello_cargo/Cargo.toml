@@ -1,0 +1,16 @@
+[package]
+name = "hello_cargo"
+version = "0.1.0"
+edition = "2021"
+
+# [package] is refering to a section heading that indicates that the following statements are configuring a package.
+# The next three line under [package] set the configuring information Cargo needs to compile the program.
+# The name, the version, and the edition of Rust to use.
+
+# In Rust, packages of code are reffered to as 'crates'. 
+
+[dependencies]
+
+# [dependencies] is refering to the start of a section heading that indicate the following statements are configuring a dependency.
+
+# Several crates can be added to the project under a [dependencies] section.
