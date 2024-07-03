@@ -1,0 +1,103 @@
+hello_world>main.rs
+
+// 'fn' = function.
+// 'main' is the name of the function
+// No arguments are currently being passed through the function.
+// The 'main' function is always the first code that runs in every executable Rust program.
+// The code inside the function are called parameters.
+// This line is printing the text, "Hello, World!" in this case, onto the screen.
+// Rust style is to indent with four spaces.
+// 'println!' calls a Rust 'macro'.
+// If the line was calling a function, there wouldn't be an '!', it would read, 'println'.
+// 'Hello, World!' is a string being passed as an argument, and the string is being printed on the screen.
+// Most lines end with a ';'. A semicolon indicates that the expression is over. 
+// In Rust, compiling and running are a seperate step.
+// To compile in Rust, we use the line 'rustc program_name.rs', in this case, 'rustc main.rs'.
+// 'ls' stands for 'list'.
+// There are three files after the program_name.rs file is compiled.
+// The files are 'program_name.rs', 'program_name.exe', and 'program_name.pdb'.
+// The 'program_name.rs' is the src code file.
+// The 'program_name.exe' is the executable code file.
+// The 'program_name.pdb' is a file that contains debugging information.
+
+hello_cargo>src>main.rs
+
+// A Rust program can be built using Cargo, with the line, "cargo new 'program_name'", in this case 'cargo new hello_cargo'.
+// 'cd program_name' can be used to change the directory to 'program_name'.
+// Cargo expects all source files to be located in the 'src' folder.
+// If a project that might use Cargo, it is much easier to start by building the project with Cargo.
+// Cargo has a built-in compiler. It can be run using the line, 'cargo build'.
+// This command create a 'program_name.exe' file.
+// Cargo puts the binary in a directory name 'debug'.
+// The executable code can be run with the line, './target/debug/program_name', or in this case, './target/debug/hello_cargo'.
+// To run the executable code in one line, we can use the line, 'cargo run'.
+// 'cargo check' can be used to check if the file can be compiled, but doesn't create an executable.
+// If there hasn't been any changes to the code, Cargo won't rebuild, but will run the program.
+
+hello_cargo>Cargo.toml
+
+# [package] is refering to a section heading that indicates that the following statements are configuring a package.
+# The next three line under [package] set the configuring information Cargo needs to compile the program.
+# The name, the version, and the edition of Rust to use.
+# In Rust, packages of code are reffered to as 'crates'.
+# [dependencies] is refering to the start of a section heading that indicate the following statements are configuring a dependency.
+# Several crates can be added to the project under a [dependencies] section. 
+
+guessing_game>src>main.rs
+
+// rand::Rng package was linked in the 'Cargo.toml' file.
+// Rng is a trait that comes from rand crate, it will be used to generate a random number.
+// std is a crate that is built into Rust that doesn't need to be linked with the Cargo.toml file.
+// cmp is a method that compares two values, and can be called on anything that can be compared.
+// Ordering is a type that is an enum, and the variants, Less, Greater, Equal.
+// std crate.
+// io is a library that is from std. io stands for input/output.
+// let is used to create a variable.
+// 'secret_number' is the name of the variable.
+// '=' binds the left side of the expression with the right side.
+// The rand::thread_rng function gives us the particular random number generator we’re going to use: one that is local to the current thread of execution and is seeded by the operating system.
+// The gen_range on the random number generator with the argument passed will generate a random number from 1 to 100, including the lower and higher end.
+// The loop keyword creates an infinite loop, running the code inside of the {}.
+// 'mut' stands for mutable, a variable is unmutable by default, meaning you can't change the value somewhere else.
+// String::new() means to create a new instance of a String.
+// Here, we are setting guess, as a mutable variable to the instance of a new String.
+// io::stdin is a type that represents a handle to the standard input for the terminal.
+// 'read_line' is a method that is being called on the standard input handle to get input from the user.
+// We're passing '&mut guess' as the argument to 'read_line; to tell it what string to store the user input in.
+// The string argument also needs to be mutable so the method can change the string's content.
+// The expect method is an instance of a a Result type.
+// If the instance of Result is an 'Err' value, expect will cause the program to crash and display the message that you passed as an argument to the expect.
+// If the read_line method returns and Err, it would likely be the result of an error coming from the underlying operating system.
+// If the instance of Result is an Ok value, expect will take the return value that Ok is holding and return just that value.
+// u32 is declaring a type to the variable. u32 is an unsigned 32 bit number.
+// Using a match expression decides what to do next based based on which variant of Ordering was return from the call to cmp with the values in guess and secret_number.
+// A match expression is made up of arms. An arm consists of a pattern to match against, and the code that should be run if the value given to match fits that arm's value.
+// Rust takes the value given to match and looks through each arm's pattern in turn.
+// Patterns and the match construct let you express a variety of situations your code might encounter, and they make sure they handle them all.
+// We bind he new variable to the expression 'guess.trim().parse()'.
+// The guess in this expression refers to the original guess variable that contained the input as a string.
+// The trim method on a String instance will eliminate any whitespace at the beginning and end, which we must do in order to compare the string to the u32, which can only contain numerical values.
+// The trim method also removes any '/r/n' which is carriage return and new line.
+// The parse mehtod on strings converts a string to another type.
+// We need to tell Rust the exact number type we want by uing u32. u32 is a good choose for a small positive number.
+// The ':' after the variable name tells rust that we'll annotate the variables type.
+// The u32 annotation adn the comparision with 'secret_number' means Rust will infer that 'secret_number' should be a u32 as well.
+// The parse method will only work on characters that can logically be converted into numbers, which is why trim is necessary.
+// The parse method also returns a Result.
+// If the parse method returns an Ok variant and contains a value of num, the expression evaluates to 'num'.
+// If the parse method returns an Err variant, the will execute the code 'continue' which tells the program to go to the next iteration of the loop.
+// The underscore is a catchall value. Which means no matter what information they have inside them, to match all Err values and ignores them.
+// A variable value can be inserted into a string using '{}' with the variable_name storing the value.
+// This function compares the value of the variable 'guess' with the value of 'secret_number' by referencing secret_number using a '&'.
+// Ordering is another enum that has variants, Less, Greater, and Equal.
+//If guess is less than secret_number, println!("Too small!").
+//If guess is greater than secret_number, println!("Too big!").
+//If guess is equal to than secret_number, println!("You win!").
+// Then 'break', which means to exit the loop when the user guesses correctly.
+
+guessing_game>Cargo.toml
+
+# rand is a 'crate library' that will be use to generate a random number.
+# A section doesn't end until a section header is placed, and then a new section is created.
+# Rust creates a cargo.lock file that to make sure when a new version is released, the code doesn't break.
+# The cargo.lock file will store the version that is hard coded into it.
