@@ -101,3 +101,101 @@ guessing_game>Cargo.toml
 # A section doesn't end until a section header is placed, and then a new section is created.
 # Rust creates a cargo.lock file that to make sure when a new version is released, the code doesn't break.
 # The cargo.lock file will store the version that is hard coded into it.
+
+
+Variables and Mutability:
+
+
+fn main() {
+    let x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
+
+This code won't compile. You cannot assign twice to the immutable variable 'x'.
+
+fn main() {
+    let mut x = 5;
+    println!("The value of x is: {x}");
+    x = 6;
+    println!("The value of x is: {x}");
+}
+
+This code will compile. The code will print:
+The value of x is: 5
+The value of x is: 6
+
+const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;
+
+Constants are declared using the 'const' keyword.
+Constants are always immutable, you cannot use 'mut' on a 'const'.
+'let' should be used to declare a variable if the variable might ever be mutable.
+The type of the value must be annotated on a const.
+Constants are declared in any scope, including the global scope.
+A constant must be set to a constant expression. It cannot be set to the result of a value that could only be computed at runtime.
+Rust's naming convention for constants is all uppercase with underscores between words.
+Constants are valid for the entire time a program runs, within the scope in which they were declared.
+
+fn main() {
+    let x = 5;
+
+    let x = x + 1;
+
+    {
+        let x = x * 2;
+        println!("The value of x in the inner scope is: {x}");
+    }
+
+    println!("The value of x is: {x}");
+}
+
+It is possible to declare a new variable with the same name as a previous variable.
+This means that the first variable is 'shadowed' by the second variable. Shadowing means that the compiler will use the last declaration as the declaration.
+x is first set to 5.
+x is then set to 'x + 1', which is equal to six.
+This is the last declaration in the scope, so the compiler will see x as 6.
+We can do this by using the 'let' keyword again before the name of the variable.
+Within an inner scope which is created by the '{}', the is the third declaration of x.
+We are creating a new variable called 'x' within the inner scope, which is taking the last declaration of x and multiplying it by 2, to get 12.
+When the inner scope ends, the inner shadowing ends, and x returns to being 6.
+When we run the program it will print the value of x in the inner scope, and then the value of x in the main scope.
+The value of x in the inner scope is: 12
+The value of x is: 6
+By using 'let' instead of 'mut', we can perform tranformations on a value, but have the variable be immutable after those tranformations are completed.
+'mut' is reassigning a variable, while 'shadowing' is transforming a variable.
+Another difference between mut and shadowing, is that we can change the type of the value, but still reuse the same name.
+For example, say our program asks a user to show how many spaces they want between some text by inputting space characters, and then we want to store that input as a number:
+let spaces = "   ";
+let spaces = spaces.len();
+The first spaces variable is a string type, while the second spaces variable is a number type.
+We can't use 'mut' in this situation, because we're not allowed to mutate a variables type.
+
+
+Data Types:
+
+
+Every value in Rust is of a certain data type, so that it knows how to work with the data.
+Rust is a statically typed language, meaning that is must know the types of all variables at compile time.
+The compiler can usually infer what type a variable is based on the value and how it is used.
+In cases where many types are possible, such as converting a string to a number using 'parese', we must add a type annotation.
+
+A 'scalar' type represents a single value.
+Rust has four primary scalar types: integers, floating-point numbers, booleans, and characters.
+
+An integer is a number without a fractional component. 
+Each variant of an integer can be unsigned or signed.
+Signed and unsigned refer to whether it's possible for the number to be negative.
+If the number needs to have a sign, that means, it can be negative or positive, and is represented with an 'i' plus the bit length, 'i32' for example.
+If the number does not need a sign, that means that the number will only ever be positive, and is represent with a 'u' plus the bit length, 'u32' for example.
+A signed number will have the same number range as an unsigned number, but the mid-point will be 0, meaning the maximum will only be half of the maximum of an unsigned number with the same bit length.
+Integer types in rust include, 8, 16, 32, 64, 128, and size, with a 'u' or 'i' before the number which determines whether the number is signed or unsigned, and the number reffering to the bit length of the number.
+The usize and isize types depend on the architecture of the computer the program is running on, 64-bit for 64-bit architecture, and 32-bit for 32-bit architecture.
+Integer literals in Rust include, Decimal, Hex, Octal, Binary, and Byte.
+An integer literal is a kind of literal for an integer whose value is directly represented in source code.
+
+Deminal can be represented as 123_456_789, which is the same as 123456789, the underscore is added to make it easier to read.
+Hex is a base-16 (0-15) and has the prefix 0x.
+Octal is a base-8 (0-7) and has the prefex 0o.
+Binary is a base-2 (0-1) and has the prefix 0b.
+Byte (u8 only) has the prefix b''. The value must be an ASCII character which is contained u8 worth of space.
