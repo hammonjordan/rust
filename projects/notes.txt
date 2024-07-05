@@ -199,3 +199,4 @@ Hex is a base-16 (0-15) and has the prefix 0x.
 Octal is a base-8 (0-7) and has the prefex 0o.
 Binary is a base-2 (0-1) and has the prefix 0b.
 Byte (u8 only) has the prefix b''. The value must be an ASCII character which is contained u8 worth of space.
+
