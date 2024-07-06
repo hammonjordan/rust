@@ -1,0 +1,1 @@
+D:\Users\Jordan\ Hammon\programming\rust\projects\rust_wasm_project\target\wasm32-unknown-unknown\release\rust_wasm_spa.wasm: D:\Users\Jordan\ Hammon\programming\rust\projects\rust_wasm_project\src\lib.rs
